@@ -10,7 +10,6 @@ import java.util.concurrent.BlockingQueue;
 @Component
 public class GoodsFetchTask implements Runnable {
 
-    private int count = 0;
     private final BlockingQueue<Integer> queue;
 
     @Autowired
@@ -22,9 +21,10 @@ public class GoodsFetchTask implements Runnable {
     public void run() {
         log.info("GoodsFetchTask started");
 
-        while (!Thread.currentThread().isInterrupted()) {
-            try {
+        try {
+            int count = 0;
 
+            while (!Thread.currentThread().isInterrupted()) {
                 count++;
 
                 // 상품 조회
@@ -33,10 +33,10 @@ public class GoodsFetchTask implements Runnable {
                 queue.put(goodsNo);
 
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                log.error("GoodsFetchTask interrupted", e);
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.info("GoodsFetchTask interrupted", e);
         }
     }
 }
