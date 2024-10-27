@@ -36,17 +36,12 @@ public class DaemonApplication implements ApplicationRunner {
     }
 
     private static void shutdownExecutorService(ExecutorService es) {
-        es.shutdown();
+        es.shutdownNow();
 
         try {
             if (!es.awaitTermination(5, TimeUnit.SECONDS)) {
-                log.warn("서비스 정상 종료 실패, 강제 종료 시도");
-                es.shutdownNow();
-
-                if (!es.awaitTermination(3, TimeUnit.SECONDS)) {
-                    log.error("서비스가 종료되지 않았습니다.");
-                    // notify developer
-                }
+                log.error("서비스가 종료되지 않았습니다.");
+                // notify developer
             }
         } catch (InterruptedException e) {
             es.shutdownNow();
