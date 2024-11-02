@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;
 
+// TODO::// 각 Task 에서 비즈니스 예외 발생시 AOP 적용해서 slack 알람 받도록 적용
 @Slf4j
 @Component
 public class GoodsFetchTask implements Runnable {
