@@ -28,12 +28,12 @@ public class GoodsFetchTask implements Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 count++;
 
-                // 상품 조회
+                // 상품 조회 (ex. DB list fetch)
                 Integer goodsNo = count;
                 log.info("Fetch goodsNo: {}", goodsNo);
-                queue.put(goodsNo);
+                queue.put(goodsNo); // blocking
 
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

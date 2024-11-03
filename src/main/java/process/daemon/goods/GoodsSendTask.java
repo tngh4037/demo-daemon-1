@@ -24,10 +24,8 @@ public class GoodsSendTask implements Runnable {
         try {
             while (!Thread.currentThread().isInterrupted()) {
                 // 상품 발송
-                Integer goodsNo = queue.take();
+                Integer goodsNo = queue.take(); // blocking
                 log.info("Send goodsNo: {}", goodsNo);
-
-                Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
